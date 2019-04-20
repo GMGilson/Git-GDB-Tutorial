@@ -1,0 +1,12 @@
+How to generate make file with Cmake
+
+Create Binary Directory
+	mkdir {binary_dir}
+
+Run cmake with --<generator-name> tag & --<path-to-build> tag
+	cmake -G Unix\ Makefiles -{binary_dir}
+
+
+In binary_dir 
+	CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile <---
+

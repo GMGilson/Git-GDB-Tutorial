@@ -1,0 +1,72 @@
+1. Initialize repo
+	~$ git init
+
+2. Add files to repo
+	~$ git add {filename}
+
+3. Commit changes to repo
+   Will open default for you to commit with message (not optional)
+	~$ git commit (with --all {-a} tag commit all staged changes)
+	if using vim type 'a' to begin editing
+	when done editing type "ctrl+c' to break edit and then use ':wq' to exit and save vim
+
+4. Check status of repo
+	~$ git status
+		returns:
+			files staged to be changed
+			files not included in repo
+
+~$ git checkout {filename} 
+	reverts uncommitted changes to the modified file
+				
+Adding files to a .gitignore file will make file not added to the repo not be flagged by git status
+	Files can be exculed using;
+		Unix wildcards:: *.txt (all files endingin .txt)
+		Directories :: {directory_name}/
+		Files :: placeholder.exe
+		Exception to pattern ! :: !something.txt (even though files ending in .txt are ignored something.txt is tracked)
+
+Use ~$ git diff
+	to see unstaged changes compared to commited files in repo
+
+~$ git rm [--cached (stops git from tracking but doesnt rm from disk)] {file}
+	stages file to be removed
+
+~$ git log [--patch {-p} shows changes between commits] [-123 shows 123 patches starting from last commit]
+
+~$ git commit --amend 
+	commits staged changes to last commit (incase you forgot something)
+
+~$ git remote (displays online branches) {--verbose returns more information on branche}
+	add - [short name] [url/ssh] adds online repo to push changes to:: this is usually where meaningful changes are made
+	remove - [short name] removes short address of online repo
+
+
+~$ git push {branch name} master
+	pushes changes to online repo for others to clone or fetch	
+
+~$ git fetch {remote branch name} (-all) 
+	pulls remote branches to local to be checkout out
+	must explictly checkout fetched branches like local branches	
+
+~$ git tag [--annotated -a (without -a it appears as a lightweight tag)] 
+	creates flags/comments on commits to denote important versions
+
+~$ git show [tagname] 
+	returns git log of that commit
+
+~$ git branch newBranchName
+	creates a new branch with copies of original files
+	doesnot switch to the branch
+
+~$ git checkout BranchName
+	switches to BranchName
+
+~$ git checkout BranchName <pathtoFile>
+	merges specific files to current branch
+
+~$ git merge <souce you want to merge>
+	merges branches to master
+	if conflict between branches will show diff between branches and ask with changes you want to keep
+
+
