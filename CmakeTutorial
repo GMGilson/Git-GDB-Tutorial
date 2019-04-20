@@ -7,6 +7,13 @@ Set project name and Languages used
 Set version of the languages used in the project
 	set(CMAKE_CXX_STANDARD 14)
 
+Name the executable to be made
+	add_executable(CursesWrapperTester
+    	    main.cpp file1.cpp file1.hpp)
+
+Give the make file compiler options
+target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror)
+
 
 How to generate make file with Cmake
 
