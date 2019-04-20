@@ -1,3 +1,13 @@
+Set minimum version of cmake required
+	cmake_minimum_required(VERSION 3.13)
+
+Set project name and Languages used
+	project(CursesWrapperTester LANGUAGES CXX)
+
+Set version of the languages used in the project
+	set(CMAKE_CXX_STANDARD 14)
+
+
 How to generate make file with Cmake
 
 Create Binary Directory
