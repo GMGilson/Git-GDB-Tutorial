@@ -1,0 +1,85 @@
+Before running gdb compile the binary with -g or --gstabs to save symbol table and labels
+
+$gdb ./{executable}
+    {--tui} will display the source code of the executable
+        in --tui mode gdb defaults to focusing the source code
+            (gdb) focus {window} 
+                will change the focus of gdb to the called window
+                    possible windows
+                        src: source code
+                        cmd: gdb shell
+                        asm: disassembly code
+            (gdb) refresh 
+                will refresh the windows incase --tui mode looks fucked up
+            (gdb) update 
+                will update source windows and the current execution point
+        You can change the window height using 
+            (gdb) winheight {window} {+ or -}count
+
+    {--args} will accept arguments that would follow the executable to make run command easier
+
+(gdb) r(shorthand) || run  
+    will run the program and stop at first break point
+
+(gdb) b(shorthand) || break {line number or label} 
+    will set a breakpoint in the debugger
+
+(gdb) p(shorthand){\t} || print {arg}
+    will print the value at the {arg}
+    {/t} denotes the format you want print to display its default is hex
+        x:integer
+        d:decimal
+        u:unsigned
+        o:octal
+        t:binary
+        c:ascii char
+        f:floating point
+
+    in assembly items must by cstyle type casted to the format you want to see it in
+    arrays can be display as:
+        (gdb) p/u array[0]@10
+        will print the array from index 0 to ten
+    
+    all print statements can be used with cstyle operators such as *(dereference), &(address_of)
+
+(gdb) watch {expression}
+    sets a watchpoint that will break when {expr} is changed
+
+(gdb) tty {filename}
+    set the default run configuration of the r command with stdin redirection of {filename}
+
+(gdb) d(shorthand) || delete {optional #}
+    without {#} will ask to delete all break points  
+    with {#} will delete breakpoint at {#}
+
+(gdb) disable/enable {#}
+    will enable/disable breakpoint at {#}
+
+
+(gdb) s(shorthand) ||step
+    steps a line
+
+(gdb) c(shorthand) || continue
+    continues until next breakpoint
+
+(gdb) u(shorthand) || until
+    continues until stackframe is deleted
+
+(gdb) i(shorthand) || info {arg}
+    gives information of {arg} at curent state of program
+    Possible {args}
+        symbol {addr}: prints the symbol the addres is stored at
+        register: prints all registers
+        args: prints args of the selected frame
+        local: prints local vars
+        catch: print all exception handellers in current stack frame
+        breakpoints: prints all breakpoints
+        frame: verbose information of the current stack frame
+        mem: table of defined memory regions
+        
+
+
+(gdb) set {label} = {value}
+    sets {label} = {value}
+    
+    
