@@ -42,8 +42,9 @@ Use ~$ git diff
 	remove - [short name] removes short address of online repo
 
 
-~$ git push {branch name} master
+~$ git push {remote repo} {branch you want to push}
 	pushes changes to online repo for others to clone or fetch	
+	using {--delete} before the branch you want to push will delete the branch locally 
 
 ~$ git fetch {remote branch name} (-all) 
 	pulls remote branches to local to be checkout out
@@ -58,6 +59,10 @@ Use ~$ git diff
 ~$ git branch newBranchName
 	creates a new branch with copies of original files
 	doesnot switch to the branch
+	using the {-d} tag followed by a branch name will delete that branch 
+	using the {-D] tag forcefully deletes the brach that follows the directive
+		(these deleted branches are local changes that must be committed)
+	
 
 ~$ git checkout BranchName
 	switches to BranchName
