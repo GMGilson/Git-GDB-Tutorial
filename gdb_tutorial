@@ -83,3 +83,5 @@ $gdb ./{executable}
     sets {label} = {value}
     
     
+(gdb) display {expression/label}
+    will print out {expression/label} after every step of the program
