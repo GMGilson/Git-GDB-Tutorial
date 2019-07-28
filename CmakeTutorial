@@ -12,7 +12,7 @@ Name the executable to be made
     	    main.cpp file1.cpp file1.hpp)
 
 Give the make file compiler options
-target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror)
+target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COMPILER OPTIMIZATIONS FOR DEBUG BUILDS}
 
 
 How to generate make file with Cmake
