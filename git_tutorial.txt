@@ -1,5 +1,9 @@
 1. Initialize repo
 	~$ git init
+		Server repository with:
+			--bare 
+			$ git remote add server user@hostname:/path/to/bare/directory
+			
 
 2. Add files to repo
 	~$ git add {filename}
