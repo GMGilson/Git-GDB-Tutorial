@@ -74,8 +74,8 @@ Use ~$ git diff
 ~$ git checkout BranchName <pathtoFile>
 	merges specific files to current branch
 
-~$ git merge <souce you want to merge>
-	merges branches to master
+~$ git merge ${branch}
+	merges ${branch} to the currently checked out branch
 	if conflict between branches will show diff between branches and ask with changes you want to keep
 
 
