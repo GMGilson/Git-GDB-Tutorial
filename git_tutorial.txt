@@ -78,4 +78,35 @@ Use ~$ git diff
 	merges ${branch} to the currently checked out branch
 	if conflict between branches will show diff between branches and ask with changes you want to keep
 
+~$ git rebase ${branch} #ACTION dependent on working branch 
+	#define feature = non master branch
+	#define release = master branch or branch that does not recieve many updates
+	Case: bringing release changes to feature branch
+		will advance feature branch to latest release commit and append any changes made in feature
 
+	Case: bringing feature changes to release branch
+		will bring all feature commits from last identical commit to release
+
+	Visualize:
+
+	master  : m1 - m2 - m3
+		 		   |
+	feature :      m2 - f1 - f2
+
+	We want to move f1 and f2 commits to m3 without overriding the m3 commit
+
+	(in feature)
+	git rebase master
+
+	master  : m1 - m2 - m3
+		 		        |
+	feature :      		m3 - f1 - f2
+
+	now we can either merge to master 
+	or
+	(in master)
+	git rebase feature
+
+	master  : m1 - m2 - m3 - f1 - f2
+		 		   		|
+	feature :      		m3 - f1 - f2
