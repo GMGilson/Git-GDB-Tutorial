@@ -4,8 +4,16 @@ Set minimum version of cmake required
 Set project name and Languages used
 	project(CursesWrapperTester LANGUAGES CXX)
 
+Setting cmake Variables
+	set(${VARNAME} VALUE)
+	
+	#! These vars can be called on using ${} notation
+
 Set version of the languages used in the project
 	set(CMAKE_CXX_STANDARD 14)
+
+Setting a variable for all source files in a directory
+	AUX_SOURCE_DIRECTORY({file} {VAR})
 
 Name the executable to be made
 	add_executable(CursesWrapperTester
