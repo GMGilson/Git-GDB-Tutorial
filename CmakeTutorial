@@ -1,37 +1,82 @@
-Set minimum version of cmake required
+#Set minimum version of cmake required
 	cmake_minimum_required(VERSION 3.13)
 
-Set project name and Languages used
+#Set project name and Languages used
 	project(CursesWrapperTester LANGUAGES CXX)
 
-Setting cmake Variables
+#Setting cmake Variables
 	set(${VARNAME} VALUE)
 	
 	#! These vars can be called on using ${} notation
 
-Set version of the languages used in the project
+#Set version of the languages used in the project
 	set(CMAKE_CXX_STANDARD 14)
 
-Setting a variable for all source files in a directory
-	AUX_SOURCE_DIRECTORY({file} {VAR})
 
-Name the executable to be made
+#Name the executable to be made
 	add_executable(CursesWrapperTester
     	    main.cpp file1.cpp file1.hpp)
 
-Give the make file compiler options
+#Give the make file compiler options
 target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COMPILER OPTIMIZATIONS FOR DEBUG BUILDS}
 
 
-How to generate make file with Cmake
+#Building Libraries from source
+	add_library(${LIB} STATIC ${SOURCE1, SOURCE2...}
 
-Create Binary Directory
+#Linking Libraries 
+    Static Lib
+	target_link_libraries(${BINNAME} ${LIBNAME}
+
+#NOTE
+	if building a lib that is to be used later it must also be linked in the driver program
+	
+
+#Creating Lists in Cmake
+	As the amount project files get larger or build trees diverge heavily it becomes impractical to just keeping adding filenames as agruments. This leads us to creating list variables that we can call to represent all the files we pass to it
+
+	list(APPEND ${LISTNAME} "file1" "file2"...)
+	
+	The list name can be defined higher in the build tree, expanded, shortened, and called later in the build tree
+
+#Setting a list variable for all source files in a directorya
+	
+	AUX_SOURCE_DIRECTORY({file} {VAR})
+	
+
+#CMake Control Flow
+	* as more files are added to the project we want to try to stay away from thigns that may repeat steps in the compilation process that we have already done
+	* this leaves control flow something to be desired so we may find and skip certain compilation steps
+
+	Cmake control flow goes as follows:
+		if(${CMAKEVAR})
+			${CMAKE Directives}...
+		endif()
+	Control flow bools can be augmented with logical keywords like {AND, NOT, OR,}
+	
+
+		
+
+#CMake Loading Messages
+	MESSAGE GLOBAL VARS:
+		FATAL_ERROR: stops cmake procesing and generation
+		SEND_ERROR: continue processing but skip generation
+		WARNING: continue processing after error print
+		STATUS: Messages displayed during processing and generation
+		See Cmake docs for more info on more obscure message vars
+
+	message(${GLOBAL VAR} "Message to be displayed ${USERVAR}")
+
+
+#How to generate make file with Cmake
+
+#Create Binary Directory
 	mkdir {binary_dir}
 
-Run cmake with --<generator-name> tag & --<path-to-build> tag
+#Run cmake with --<generator-name> tag & --<path-to-build> tag
 	cmake -G Unix\ Makefiles -{binary_dir}
 
 
-In binary_dir 
+#In binary_dir 
 	CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile <---
 
