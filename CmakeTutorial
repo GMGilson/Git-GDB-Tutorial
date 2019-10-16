@@ -43,6 +43,10 @@ target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COM
 	
 	AUX_SOURCE_DIRECTORY({file} {VAR})
 	
+#I've had problems with AUX_SOURCE_DIRECTORY() before 
+#Sometimes file(GLOB) works better
+#does the same thing with better documentation
+	file(GLOB ${VAR} "some unix wildcard expression")
 
 #CMake Control Flow
 	* as more files are added to the project we want to try to stay away from thigns that may repeat steps in the compilation process that we have already done
