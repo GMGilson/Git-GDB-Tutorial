@@ -30,6 +30,20 @@ Adding files to a .gitignore file will make file not added to the repo not be fl
 		Files :: placeholder.exe
 		Exception to pattern ! :: !something.txt (even though files ending in .txt are ignored something.txt is tracked)
 
+~git clean 
+	-d 
+		remove untracked directories aswell as untracked files
+
+	-f --force 
+		will delete untracked files 
+		
+	-i --interactive
+		interactively clean git repo
+	
+	-e {pattern}, --exclude {pattern}
+		exclude pattern from removal
+	
+
 Use ~$ git diff
 	to see unstaged changes compared to commited files in repo
 
