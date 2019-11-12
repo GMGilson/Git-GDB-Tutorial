@@ -24,6 +24,12 @@ target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COM
 #Building Libraries from source
 	add_library(${LIB} STATIC ${SOURCE1, SOURCE2...}
 
+	You may run into some problems when building purely from header files as cmake determines linker 
+	language from the source files
+	This problem can be fixed by specifying the target's languages via 
+
+	set_target_properties(${TARGETNAME} PROPERTIES LINKER_LANGUAGE CXX)
+
 #Linking Libraries 
     Static Lib
 	target_link_libraries(${BINNAME} ${LIBNAME}
