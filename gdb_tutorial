@@ -35,7 +35,7 @@ $gdb ./{executable}
         c:ascii char
         f:floating point
 
-    in assembly items must by cstyle type casted to the format you want to see it in
+    in assembly objects must by cstyle type casted to the format you want to see it in
     arrays can be display as:
         (gdb) p/u array[0]@10
         will print the array from index 0 to ten
@@ -48,12 +48,12 @@ $gdb ./{executable}
 (gdb) tty {filename}
     set the default run configuration of the r command with stdin redirection of {filename}
 
-(gdb) d(shorthand) || delete {optional #}
-    without {#} will ask to delete all break points  
-    with {#} will delete breakpoint at {#}
+(gdb) d(shorthand) || delete {optional index}
+    without {index} will ask to delete all break points  
+    with {index} will delete breakpoint at {index}
 
-(gdb) disable/enable {#}
-    will enable/disable breakpoint at {#}
+(gdb) disable/enable {index}
+    will enable/disable breakpoint at {index}
 
 
 (gdb) s(shorthand) ||step
@@ -85,3 +85,27 @@ $gdb ./{executable}
     
 (gdb) display {expression/label}
     will print out {expression/label} after every step of the program
+
+
+(gdb) call {function or subroutine}(ARGS)
+	will call the equivalent written in the executable
+	cannot call functions that have not been compiled with the origional binary
+		-> cannot call vec.pop_back() if the function was not called anywhere else in the program
+		   this is because gdb is not a compiler and since that function was not called anywhere else in the program
+		   it likely was never compiled in the first place
+
+
+$(bash) ulimit -c unlimited
+	enables the generation of core files upon segfault
+
+	core files are saved states of your program that can be look at and altered like snapshots 
+
+$(bash) gdb ${EXECUTABLE} ${COREFILE}
+	loads the saved core state of the program in gdb
+
+(gdb) set use-coredump-filter on|off
+	applies the core snapshot to the current gdb session
+
+
+(gdb) gcore ${FILENAME}
+		produces a core file at the current state of the gdb session
