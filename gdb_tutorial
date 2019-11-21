@@ -55,7 +55,6 @@ $gdb ./{executable}
 (gdb) disable/enable {index}
     will enable/disable breakpoint at {index}
 
-
 (gdb) s(shorthand) ||step
     steps a line
 
@@ -77,7 +76,6 @@ $gdb ./{executable}
         frame: verbose information of the current stack frame
         mem: table of defined memory regions
         
-
 
 (gdb) set {label} = {value}
     sets {label} = {value}
@@ -109,3 +107,32 @@ $(bash) gdb ${EXECUTABLE} ${COREFILE}
 
 (gdb) gcore ${FILENAME}
 		produces a core file at the current state of the gdb session
+
+Similar to the .bashrc we can also use a .gdbinit to run gdb commands until
+	This .gdbinit file can be declared in the working directory or globally in the user's $HOME directory
+	simply write the commands in the gdbinit file as you would in the gdb shell and they will be run upon gdb startup
+
+
+(gdb) record
+	tells gdb to start recording what gdb commands have been called
+
+	this enables reverse execution 
+
+The following set of gdb commands require record has been invoked
+NOTE that not all instructions may be supported by this functionality ie IO devices or IOstreams
+startif
+
+	(gdb) rc(shorthand) || reverse-continue
+		reverses execution of the program back to the last breakpoint
+
+	(gdb) rs(shorthand) || reverse-step
+		like the step command but backward in execution
+
+	(gdb) rn(shorthand) || reverse-next
+		like the next command but backwards in execution
+
+	(gdb) reverse-finish
+		takes you back to the start of the current function execution
+
+endif
+
