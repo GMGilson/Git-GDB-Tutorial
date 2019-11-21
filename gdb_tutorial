@@ -136,3 +136,7 @@ startif
 
 endif
 
+
+We are also able to fully interface with the bash terminal that we invoked gdb from
+
+(gdb) shell ${SHELL COMMAND} 
