@@ -18,8 +18,11 @@
     	    main.cpp file1.cpp file1.hpp)
 
 #Give the make file compiler options
-target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COMPILER OPTIMIZATIONS FOR DEBUG BUILDS}
+	target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COMPILER OPTIMIZATIONS FOR DEBUG BUILDS}
 
+#Directories 
+	You can include whole directories to the working directory of Cmake with 
+	include_directories(dir1 dir2)
 
 #Building Libraries from source
 	add_library(${LIB} STATIC ${SOURCE1, SOURCE2...}
@@ -64,7 +67,27 @@ target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COM
 		endif()
 	Control flow bools can be augmented with logical keywords like {AND, NOT, OR,}
 	
+#Creating files and directories
+Reading
+  	file(READ <filename> <out-var> [...])
+  	file(STRINGS <filename> <out-var> [...])
+  	file(<HASH> <filename> <out-var>)
+  	file(TIMESTAMP <filename> <out-var> [...])
 
+Writing
+  	file({WRITE | APPEND} <filename> <content>...)
+ 	file({TOUCH | TOUCH_NOCREATE} [<file>...])
+  	file(GENERATE OUTPUT <output-file> [...])
+
+Filesystem
+	file({GLOB | GLOB_RECURSE} <out-var> [...] [<globbing-expr>...])
+	file(RENAME <oldname> <newname>)
+	file({REMOVE | REMOVE_RECURSE } [<files>...])
+  	file(MAKE_DIRECTORY [<dir>...])
+  	file({COPY | INSTALL} <file>... DESTINATION <dir> [...])
+  	file(SIZE <filename> <out-var>)
+	file(READ_SYMLINK <linkname> <out-var>)
+	file(CREATE_LINK <original> <linkname> [...])
 		
 
 #CMake Loading Messages
@@ -81,10 +104,26 @@ target_compile_options(CursesWrapperTester PRIVATE -Wall -Werror){DO NOT USE COM
 #How to generate make file with Cmake
 
 #Create Binary Directory
-	mkdir {binary_dir}
+	(bash) mkdir {binary_dir}
+
+#You will notice that cmake genreates a lot of ugly files in your working tree
+#You may want to move these files into another directory to declutter the working tree
+
+	(bash) cd ${cmake-files}
+	(bash) cmake ../
+#This will generate the files in this {cmake-files} directory
+#This {cmake-files} directory will likely be your bin directory as i dont currently know how to specify where the cmake generated files will output to
+
+#You may also want to specify where targets output to
+	set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
+	set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
+
+	where LIBRARY_OUTPUT_PATH, EXECUTABLE_OUTPUT_PATH, and CMAKE_SOURCE_DIR are global cmake variables
+	lib and bin are directories specified by the writer
+
 
 #Run cmake with --<generator-name> tag & --<path-to-build> tag
-	cmake -G Unix\ Makefiles -{binary_dir}
+	(bash) cmake -G Unix\ Makefiles -{binary_dir}
 
 
 #In binary_dir 
