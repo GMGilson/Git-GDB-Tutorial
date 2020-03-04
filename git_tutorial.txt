@@ -20,8 +20,10 @@
 			files staged to be changed
 			files not included in repo
 
-~$ git checkout {filename} 
-	reverts uncommitted changes to the modified file
+~$ git checkout {filename} {branch}
+	reverts uncommitted changes to the modified file if branch no specified
+	brings filename from branch into current branch as changes
+	moves HEAD to branch if filename unspecified
 				
 Adding files to a .gitignore file will make file not added to the repo not be flagged by git status
 	Files can be exculed using;
