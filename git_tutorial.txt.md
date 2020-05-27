@@ -4,7 +4,7 @@ See Docs [here](https://git-scm.com/doc) for more in-depth information
 
 ### Notes
 - Arguments contained in `{--brackets}` are considered optional
-- If an argument is prefixed with a `$`, it is mandatory ie) ${argument}
+- If an argument is prefixed with a `$`, it is mandatory ie) `${argument}`
 
 ## Basic Practice 
 
@@ -63,7 +63,7 @@ Behavior:
 
 ### Merge Target to Current
 	~$ git merge ${TargetBranch}
-- Merges $TargetBranch to the currently checkedout branch
+- Merges `$TargetBranch` to the currently checkedout branch
 - If conflict between branches will show diff between branches and ask with changes you want to keep
 
 ### Rebasing
