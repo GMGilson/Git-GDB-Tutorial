@@ -1,109 +1,84 @@
-1. Initialize repo
-	~$ git init
-		Server repository with:
-			--bare 
-			$ git remote add server user@hostname:/path/to/bare/directory
+# Intro to Git Cheatsheet
+This document is meant to serve as a cheatsheet for users learning git that I have compiled over my time as a student.\
+See Docs [here](https://git-scm.com/doc) for more in-depth information
+
+### Notes
+- Arguments contained in `{--brackets}` are considered optional
+- If an argument is prefixed with a `$`, it is mandatory ie) ${argument}
+
+## Basic Practice 
+
+### Initialize repo
+	~$ git init {--bare}
 			
+Creates a repository to begin tracking
+ - If initalized with `--bare` flag establishes respository to be used for remote work
 
-2. Add files to repo
-	~$ git add {filename}
+### Stage files to next commit
+	~$ git add ${filename}
 
-3. Commit changes to repo
-   Will open default for you to commit with message (not optional)
-	~$ git commit (with --all {-a} tag commit all staged changes)
-	if using vim type 'a' to begin editing
-	when done editing type "ctrl+c' to break edit and then use ':wq' to exit and save vim
+### Removing Files
+	~$ git rm {--cached} ${file}
+- Removes file from filesystem and tracking
+- If `--cached` flag, only remove $file from tracking not filesystem
 
-4. Check status of repo
+### Commit changes to repo
+##### Commit often, it saves you later
+Will open default editor for you to commit with message (this is not optional)
+
+	~$ git commit {--all or -a}
+Flag commit all staged changes)
+	
+	~$ git commit --amend 
+Commits staged changes to last commit (incase you forgot something)
+
+### Check status of repo
 	~$ git status
-		returns:
-			files staged to be changed
-			files not included in repo
+Behavior:
+* Files staged to be changed
+* Files not included in repo
 
-~$ git checkout {filename} {branch}
-	reverts uncommitted changes to the modified file if branch no specified
-	brings filename from branch into current branch as changes
-	moves HEAD to branch if filename unspecified
-				
-Adding files to a .gitignore file will make file not added to the repo not be flagged by git status
-	Files can be exculed using;
-		Unix wildcards:: *.txt (all files endingin .txt)
-		Directories :: {directory_name}/
-		Files :: placeholder.exe
-		Exception to pattern ! :: !something.txt (even though files ending in .txt are ignored something.txt is tracked)
+## Branching
+### Making a new branch
+	~$ git branch {-d, -D} ${newBranchName}
+Behavior: 
+- Creates a new branch with copies of original files. Note this does not checkout the new branch
+- if using `-d` flag followed by a branch name will delete that branch 
+- if using `-D` flag forcefully deletes that branch
+- Note these deleted branches are local changes that must be committed
 
-~git clean 
-	-d 
-		remove untracked directories aswell as untracked files
+<!-- -->
+### Checkout file
+	~$ git checkout ${filename} {branch}
+Behavior:
+- If branch no specified, reverts uncommitted changes to the modified file 
+- Brings `$filename` from `$branch` into current branch as uncommitted changes
+- Moves `HEAD` to `$branch` if filename unspecified
 
-	-f --force 
-		will delete untracked files 
-		
-	-i --interactive
-		interactively clean git repo
-	
-	-e {pattern}, --exclude {pattern}
-		exclude pattern from removal
-	
+<!--  -->
+### Checkout Branch
+	~$ git checkout BranchName
+Behavior:
+- Switches to `$BranchName`
 
-Use ~$ git diff
-	to see unstaged changes compared to commited files in repo
+### Merge Target to Current
+	~$ git merge ${TargetBranch}
+- Merges $TargetBranch to the currently checkedout branch
+- If conflict between branches will show diff between branches and ask with changes you want to keep
 
-~$ git rm [--cached (stops git from tracking but doesnt rm from disk)] {file}
-	stages file to be removed
+### Rebasing
 
-~$ git log [--patch {-p} shows changes between commits] [-123 shows 123 patches starting from last commit]
+	~$ git rebase ${branch} #ACTION dependent on working branch 
+Let feature = non master branch\
+Let release = master branch or branch that does not recieve many updates\
 
-~$ git commit --amend 
-	commits staged changes to last commit (incase you forgot something)
+- Case: bringing release changes to feature branch
+	will advance feature branch to latest release commit and append any changes made in feature
 
-~$ git remote (displays online branches) {--verbose returns more information on branche}
-	add - [short name] [url/ssh] adds online repo to push changes to:: this is usually where meaningful changes are made
-	remove - [short name] removes short address of online repo
+- Case: bringing feature changes to release branch
+	will bring all feature commits from last identical commit to release
 
-
-~$ git push {remote repo} {branch you want to push}
-	pushes changes to online repo for others to clone or fetch	
-	using {--delete} before the branch you want to push will delete the branch locally 
-
-~$ git fetch {remote branch name} (-all) 
-	pulls remote branches to local to be checkout out
-	must explictly checkout fetched branches like local branches	
-
-~$ git tag [--annotated -a (without -a it appears as a lightweight tag)] 
-	creates flags/comments on commits to denote important versions
-
-~$ git show [tagname] 
-	returns git log of that commit
-
-~$ git branch newBranchName
-	creates a new branch with copies of original files
-	doesnot switch to the branch
-	using the {-d} tag followed by a branch name will delete that branch 
-	using the {-D] tag forcefully deletes the brach that follows the directive
-		(these deleted branches are local changes that must be committed)
-	
-
-~$ git checkout BranchName
-	switches to BranchName
-
-~$ git checkout BranchName <pathtoFile>
-	merges specific files to current branch
-
-~$ git merge ${branch}
-	merges ${branch} to the currently checked out branch
-	if conflict between branches will show diff between branches and ask with changes you want to keep
-
-~$ git rebase ${branch} #ACTION dependent on working branch 
-	#define feature = non master branch
-	#define release = master branch or branch that does not recieve many updates
-	Case: bringing release changes to feature branch
-		will advance feature branch to latest release commit and append any changes made in feature
-
-	Case: bringing feature changes to release branch
-		will bring all feature commits from last identical commit to release
-
-	Visualize:
+Visualize:
 
 	master  : m1 - m2 - m3
 		 		   |
@@ -126,3 +101,68 @@ Use ~$ git diff
 	master  : m1 - m2 - m3 - f1 - f2
 		 		   		|
 	feature :      		m3 - f1 - f2
+
+
+### .gitignore
+
+Adding files to a .gitignore file will make file not added to the repo not be flagged by git status
+
+Files can be exculed using:
+- Unix wildcards. 
+  - ex) `*.txt`
+- Directories 
+  - ex) `{directory_name}/`
+- Files 
+  -  ex) `placeholder.exe`
+- Exception to pattern `!` 
+  - ex) `!something.txt` (even though files ending in .txt are ignored something.txt is tracked)
+
+### Cleaning Untracked Files
+Secnario: Your program generates some output files in your working directory that you dont plan on tracking. 
+
+	~git clean ${-dfi} {-e ${pattern}} # at least one required
+Flags:
+- `-d`, 
+  remove untracked directories aswell as untracked files
+
+- `-f, --force`, unless force is specified, no files will be deleted
+
+- `-i --interactive`,
+interactively clean git repo
+
+- `-e {pattern}, --exclude {pattern}`,
+		exclude pattern from removal
+	
+### Looking at Changes
+	~$ git diff
+Behavior: to see unstaged changes compared to commited files in repo
+
+	~$ git log 
+- shows changes between commits
+
+
+### Remote Git
+
+	~$ git remote add ${remoteName} ${url}
+- adds remote repository named `$remoteName` at `$url` 
+
+	~$ git remote remove ${remoteName}
+- removes `$remoteName` as a commitable repository
+
+#### Sharing Changes
+
+	~$ git push ${remoteName} {--delete} ${RemoteBranch}
+- Pushes changes to online repo for others to clone or fetch	
+- If `--delete` before the branch you want to push will delete the branch locally 
+
+<!--  -->
+
+	~$ git fetch ${remote branch name} {-all}
+ - Clones remote branches to local to be checkout out
+
+
+<!--  -->
+	~$ git pull ${remoteName} ${remoteBranchName}
+- Fetch then merge `$remoteBranchName` into `HEAD`
+
+	
