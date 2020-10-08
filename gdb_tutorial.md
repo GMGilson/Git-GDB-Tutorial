@@ -3,7 +3,7 @@
 Notes:
 - Command prefaced with `~$` denote commands being executed in a POSIX compliant shell
 - Commands prefaced with `(gdb)` denote valid gdb commands 
-- This cheatsheet was created with GNU_ASMx86 in mind as it was written when I was taking a Systems Programming Class
+- This cheatsheet was created with GNU_ASMx86 in mind as it was written when I was taking a Systems Programming Class (ECS 50 UC Davis Spring 2019, w/ Matthew Butner)
 
 
 ## Prequisites
