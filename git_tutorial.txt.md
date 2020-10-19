@@ -81,7 +81,7 @@ Let release = master branch or branch that does not recieve many updates\
 Visualize:
 
 	master  : m1 - m2 - m3
-		 		   |
+		       |
 	feature :      m2 - f1 - f2
 
 	We want to move f1 and f2 commits to m3 without overriding the m3 commit
@@ -90,8 +90,8 @@ Visualize:
 	git rebase master
 
 	master  : m1 - m2 - m3
-		 		        |
-	feature :      		m3 - f1 - f2
+		 	    |
+	feature :      	    m3 - f1 - f2
 
 	now we can either merge to master 
 	or
@@ -99,8 +99,8 @@ Visualize:
 	git rebase feature
 
 	master  : m1 - m2 - m3 - f1 - f2
-		 		   		|
-	feature :      		m3 - f1 - f2
+		 	     
+	feature :      	    m3 - f1 - f2
 
 
 ### .gitignore
