@@ -99,7 +99,7 @@ Visualize:
 	git rebase feature
 
 	master  : m1 - m2 - m3 - f1 - f2
-		 	     
+		 	    |
 	feature :      	    m3 - f1 - f2
 
 
