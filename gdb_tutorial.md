@@ -2,7 +2,8 @@
 
 Notes:
 - Command prefaced with `~$` denote commands being executed in a POSIX compliant shell
-- Commands prefaced with `(gdb)` denote valid gdb commands 
+- Commands prefaced with `(gdb)` denote valid gdb commands
+	- Commands that are written in the form `w(ord)` denote a shorthand version of the command where only the non parenthesized characters are optional
 - This cheatsheet was created with GNU_ASMx86 in mind as it was written when I was taking a Systems Programming Class (ECS 50 UC Davis Spring 2019, w/ Matthew Butner)
 
 
