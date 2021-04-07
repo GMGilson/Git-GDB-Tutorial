@@ -8,11 +8,16 @@ See Docs [here](https://git-scm.com/doc) for more in-depth information
 
 ## Basic Practice 
 
-### Initialize repo
+### Working/starting locally
+#### Initialize repo
 	~$ git init {--bare}
 			
 Creates a repository to begin tracking
  - If initalized with `--bare` flag establishes respository to be used for remote work
+
+### Repo already exists
+#### clone repo
+	~$ git clone <linkToRepository>
 
 ### Stage files to next commit
 	~$ git add ${filename}
